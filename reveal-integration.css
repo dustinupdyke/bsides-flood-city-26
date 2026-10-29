@@ -1,0 +1,48 @@
+/* Keep the original 1600 × 900 artwork inside reveal's scaled canvas. */
+#keynote { opacity:1; transform:none; text-align:left; font:inherit; }
+body.reveal-viewport { background:var(--night); }
+#keynote .slide-number { background:none; padding:0; }
+#keynote .slides { text-align:left; }
+#keynote .slides > section { padding:0; margin:0; height:900px; }
+#keynote .stage { width:1600px; height:900px; margin:0; container-type:inline-size; }
+#keynote .slide { display:block; width:100%; height:100%; visibility:visible; opacity:1; transform:none; }
+#keynote section.present .entrance { opacity:1; transform:none; }
+#keynote section.present .photo { transform:scale(1); }
+#keynote section.present .curve path.trace { stroke-dashoffset:0; }
+#keynote section.present .d1 { transition-delay:.13s; }
+#keynote section.present .d2 { transition-delay:.29s; }
+#keynote section.present .d3 { transition-delay:.46s; }
+#keynote section.present .d4 { transition-delay:.65s; }
+#keynote section.present .d5 { transition-delay:.82s; }
+#keynote svg, #keynote img { max-width:none; max-height:none; }
+#keynote .light + .slide-number { color:#64716e; }
+/* Reveal handles navigation. The artwork's section styling stays isolated. */
+.deck-tools { position:fixed; z-index:50; bottom:14px; left:50%; transform:translateX(-50%); display:flex; gap:6px; padding:7px; background:#222220ed; border:1px solid #77746f; border-radius:10px; opacity:0; transition:opacity .2s; }
+.deck-tools:hover, .deck-tools:focus-within, .deck-tools.is-visible { opacity:1; }
+.deck-tools button, .print-tools button { padding:9px 13px; border:0; border-radius:5px; background:#f3f1ec; color:#171716; cursor:pointer; white-space:nowrap; font:500 14px Helvetica,Arial,sans-serif; }
+.deck-tools button:hover, .print-tools button:hover { background:#ed4935; color:white; }
+.deck-tools kbd { margin-left:7px; color:#68645f; font-size:11px; }
+.print-tools { position:fixed; inset:0 0 auto; z-index:100; padding:12px 20px; background:#222220; color:#faf9f6; font:14px Helvetica,Arial,sans-serif; display:flex; gap:20px; align-items:center; justify-content:center; }
+.print-tools[hidden] { display:none; }
+.print-tools a { color:#faf9f6; }
+html.reveal-print, html.reveal-print body { margin:0!important; padding:0!important; overflow:visible!important; background:#fff; }
+.reveal-print #keynote .slides > section, .reveal-print #keynote .pdf-page > section { padding:0!important; margin:0!important; border:0!important; }
+.reveal-print #keynote .stage { position:relative!important; width:1600px!important; height:900px!important; overflow:hidden!important; }
+.reveal-print #keynote .stage > .slide { position:absolute!important; inset:0!important; width:100%!important; height:100%!important; page-break-after:auto!important; }
+.reveal-print #keynote .entrance { opacity:1!important; transform:none!important; }
+.reveal-print #keynote .curve path.trace { stroke-dashoffset:0!important; }
+.reveal-print #keynote *, .reveal-print #keynote *::before, .reveal-print #keynote *::after { animation:none!important; transition:none!important; print-color-adjust:exact!important; -webkit-print-color-adjust:exact!important; }
+.reveal-print #keynote .stage .slide-number { display:block!important; }
+.reveal-print .deck-tools, .speaker-preview .deck-tools { display:none; }
+/* A dedicated notes page follows each slide when requested. */
+.reveal-print #keynote .speaker-notes-pdf { box-sizing:border-box; padding:70px 100px!important; font:28px/1.5 Helvetica,Arial,sans-serif!important; color:#171716; background:#f3f1ec; text-align:left; }
+.note-heading { border-top:5px solid #ed4935; padding-top:18px; margin-bottom:28px; }
+.note-heading small { color:#77746f; font:600 14px/1.4 Helvetica,Arial,sans-serif; letter-spacing:.12em; }
+.note-heading h2 { margin:12px 0 0; font:700 36px/1.15 Helvetica,Arial,sans-serif; letter-spacing:-.025em; }
+.speaker-notes-pdf p { margin:0 0 15px; }
+.speaker-notes-pdf ul { margin:0 0 15px; padding-left:1.25em; }
+.speaker-notes-pdf li { margin-bottom:8px; }
+.reveal-print #keynote .slides > .speaker-notes-pdf:last-child { break-after:avoid!important; page-break-after:avoid!important; }
+@media print { .deck-tools, .print-tools { display:none!important; } }
+@media (prefers-reduced-motion:reduce) { *, *::before, *::after { animation:none!important; transition:none!important; } #keynote .entrance { opacity:1; transform:none; } }
+@media (max-width:700px) { .deck-tools { max-width:98vw; flex-wrap:wrap; justify-content:center; } .deck-tools kbd { display:none; } .print-tools { flex-wrap:wrap; gap:8px; } }
