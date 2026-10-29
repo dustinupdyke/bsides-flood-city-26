@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#080c14">
+  <meta name="color-scheme" content="only light">
   <meta name="description" content="Bringing AI Into Your Organization — an immersive keynote by Dustin Updyke for BSides Flood City 2026.">
   <title>Bringing AI Into Your Organization · NASA Modernist</title>
   <link rel="stylesheet" href="vendor/reveal/reveal.css">
   <style>
-    :root { color-scheme: dark; --night:#080c14; --deep:#101824; --lime:#d6fb4b; --aqua:#64e4dc; --orange:#ff7955; --white:#f3f3ec; --gray:#9ca8b2; --ease:cubic-bezier(.2,.78,.13,1); }
+    :root { color-scheme: only light; --night:#080c14; --deep:#101824; --lime:#d6fb4b; --aqua:#64e4dc; --orange:#ff7955; --white:#f3f3ec; --gray:#9ca8b2; --ease:cubic-bezier(.2,.78,.13,1); }
     * { box-sizing: border-box; }
     html,body { margin:0; width:100%; height:100%; overflow:hidden; background:#030609; color:var(--white); }
     body { font-family:"Avenir Next","Helvetica Neue",Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased; user-select:none; }
@@ -326,7 +327,7 @@ body:not(.presenter-mode) #viewport { background:#171716; }
 .nested-layers rect { fill:#ed4935; rx:0; }
 .nested-layers path { stroke:#ed4935; }
 .nested-layers g.entrance circle { fill:#ed4935; stroke:none; }
-.nested-layers g.entrance text { fill:#fff; font-weight:700; }
+#keynote .nested-layers g.entrance text { fill:#000; font-weight:700; }
 .chapter .chapnum { top:9cqw; right:5cqw; font-size:15cqw; color:#a7a39b; font-weight:300; }
 .chapter .chaphead { left:5cqw; top:23cqw; font-size:11cqw; }
 .chapter.person .chaphead { font-size:9cqw; }
@@ -416,7 +417,9 @@ body:not(.presenter-mode) #viewport { background:#171716; }
 .s-why h2, .s-why .ladder { text-shadow:0 2px 5px #0009!important; }
 </style>
 <style>
-.s-noise h2 { color:#000000; text-shadow:none!important; }
+#keynote .s-noise h2 { color:#000000; text-shadow:none!important; }
+/* Keep these labels black after Chromium's automatic dark-mode recoloring. */
+#keynote .black-label { filter:brightness(0)!important; }
 .s-noise h2 .orange { color:#ed4935; }
 </style>
 <style>
@@ -437,7 +440,7 @@ body:not(.presenter-mode) #viewport { background:#171716; }
 .s-questions .chips span { border-top-color:#0b3d91; }
 </style>
 
-<link rel="stylesheet" href="reveal-integration.css">
+<link rel="stylesheet" href="reveal-integration.css?v=3">
 </head>
 
 <body>
@@ -478,7 +481,7 @@ body:not(.presenter-mode) #viewport { background:#171716; }
 <div class="stage"><div class="slide s-noise">
         <div class="aerospace-rule" aria-hidden="true"></div>
         <div class="photo"></div>
-        <h2 class="display entrance d1">EVERYONE<br>HAS A<br><span class="orange">TAKE.</span></h2>
+        <h2 class="display entrance d1" style="color-scheme:only light"><span class="black-label" style="color:#000!important;-webkit-text-fill-color:#000!important;color-scheme:only light">EVERYONE<br>HAS A</span><br><span class="orange">TAKE.</span></h2>
         <div class="stripe"></div>
       </div><span class="slide-number">3 / 25</span></div>
 <aside class="notes"><div class="note-heading"><small>SLIDE 03 / 25</small><h2>Everyone has a take</h2></div><p>Competing stories shape the conversation:</p><ul><li>Acceleration: capability is rising quickly and threatens cognitive work.</li><li>Historical skepticism: technological disruption also creates opportunities.</li><li>Meaning and trust: the challenge is reorganizing institutions, not just adopting tools.</li><li>The agentic economy: coordination and discovery become infrastructure.</li><li>Underuse: using AI more creates new capacity, enablement, and innovation challenges.</li></ul></aside>
@@ -509,7 +512,7 @@ body:not(.presenter-mode) #viewport { background:#171716; }
           </g>
           <g class="entrance d4">
             <rect x="465" y="323" width="490" height="38" rx="2" fill="#64e4dc"/>
-            <text x="710" y="342" fill="#0b111b" font-family="Avenir Next,Helvetica Neue,Arial,sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" text-anchor="middle" dominant-baseline="middle">SECURITY</text>
+            <text class="black-label" x="710" y="342" fill="#000" style="fill:#000!important;color:#000!important;-webkit-text-fill-color:#000!important;color-scheme:only light" font-family="Avenir Next,Helvetica Neue,Arial,sans-serif" font-weight="700" font-size="17" letter-spacing="1.5" text-anchor="middle" dominant-baseline="middle">SECURITY</text>
           </g>
         </svg>
       </div><span class="slide-number">5 / 25</span></div>

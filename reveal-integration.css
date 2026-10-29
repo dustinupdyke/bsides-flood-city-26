@@ -16,6 +16,8 @@ body.reveal-viewport { background:var(--night); }
 #keynote section.present .d5 { transition-delay:.82s; }
 #keynote svg, #keynote img { max-width:none; max-height:none; }
 #keynote .light + .slide-number { color:#64716e; }
+#keynote .s-noise h2 { color:#000; }
+#keynote .s-layers .nested-layers g.entrance text { fill:#000; }
 /* Reveal handles navigation. The artwork's section styling stays isolated. */
 .deck-tools { position:fixed; z-index:50; bottom:14px; left:50%; transform:translateX(-50%); display:flex; gap:6px; padding:7px; background:#222220ed; border:1px solid #77746f; border-radius:10px; opacity:0; transition:opacity .2s; }
 .deck-tools:hover, .deck-tools:focus-within, .deck-tools.is-visible { opacity:1; }
