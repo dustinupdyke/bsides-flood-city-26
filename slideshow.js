@@ -26,7 +26,8 @@
   window.keynote = new Reveal(document.querySelector('#keynote'), {
     width:1600, height:900, margin:0, center:false,
     controls:false, progress:false, slideNumber:false,
-    hash:!speakerPreview && !printMode, hashOneBasedIndex:true,
+    // The notes plugin generates zero-based numeric URLs for its previews.
+    hash:!speakerPreview && !printMode, hashOneBasedIndex:!speakerPreview,
     transition:'fade', backgroundTransition:'none',
     scrollActivationWidth:null, pdfMaxPagesPerSlide:1,
     pdfSeparateFragments:false, pdfPageHeightOffset:0,
