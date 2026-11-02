@@ -4,6 +4,13 @@
   const params = new URLSearchParams(location.search);
   const printMode = params.has('print-pdf');
   const speakerPreview = params.has('receiver');
+  // Compare the original slide markup, before reveal adds navigation state.
+  let revision = 2166136261;
+  for (const character of document.querySelector('#keynote').innerHTML) {
+    revision = Math.imul(revision ^ character.charCodeAt(0), 16777619);
+  }
+  const deckRevision = (revision >>> 0).toString(16);
+  document.documentElement.dataset.deckRevision = deckRevision;
   const tools = document.querySelector('.deck-tools');
   const printTools = document.querySelector('#printTools');
   if (speakerPreview) document.body.classList.add('speaker-preview');
@@ -69,6 +76,34 @@
   await document.fonts.ready;
   await Promise.all([...document.images].map(img => img.decode().catch(() => {})));
   await deck.initialize();
+  if (!speakerPreview && !printMode) {
+    // A notes window survives audience-page reloads. Its live iframe previews
+    // must reload too when the slide content has changed.
+    window.addEventListener('message', event => {
+      let message;
+      try { message = JSON.parse(event.data); } catch { return; }
+      if (message?.namespace !== 'reveal-notes' || message.type !== 'heartbeat') return;
+      try {
+        const presenter = event.source;
+        if (!presenter || presenter.opener !== window) return;
+        const { h, v = 0 } = deck.getIndices();
+        presenter.document.querySelectorAll('#current-slide iframe, #upcoming-slide iframe').forEach(frame => {
+          const preview = frame.contentDocument;
+          if (!preview || preview.readyState !== 'complete' ||
+              preview.documentElement.dataset.deckRevision === deckRevision ||
+              frame.dataset.refreshingRevision === deckRevision) return;
+          const url = new URL(frame.src);
+          if (url.origin !== location.origin || url.pathname !== location.pathname) return;
+          url.searchParams.set('deck-revision', deckRevision);
+          url.hash = `#/${h}/${v}`;
+          frame.dataset.refreshingRevision = deckRevision;
+          frame.src = url.href;
+        });
+      } catch {
+        // Cross-origin windows cannot inspect or replace our previews.
+      }
+    });
+  }
   const updateTitle = () => {
     if (!printMode) document.title = `${deck.getIndices().h + 1} · ${deck.getCurrentSlide().dataset.title} · AI Adoption`;
   };
